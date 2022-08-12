@@ -1,4 +1,4 @@
-# fixit
+# On Demande Services app
 
 A new Flutter project.
 
