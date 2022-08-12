@@ -1,32 +1,22 @@
-import 'package:fixit/models/service.dart';
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
+import 'package:fixit/utils/constants/constants.dart';
+import 'package:fixit/utils/helpers/dimensions.dart';
 import 'package:fixit/view/widgets/fade_animation.dart';
+import 'package:fixit/view/widgets/main_drawer.dart';
+import 'package:fixit/view/widgets/service_container.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   const HomePage({ Key? key }) : super(key: key);
 
   @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  List<Service> services = [
-    Service('Cleaning', 'https://img.icons8.com/external-vitaliy-gorbachev-flat-vitaly-gorbachev/2x/external-cleaning-labour-day-vitaliy-gorbachev-flat-vitaly-gorbachev.png'),
-    Service('Plumber', 'https://img.icons8.com/external-vitaliy-gorbachev-flat-vitaly-gorbachev/2x/external-plumber-labour-day-vitaliy-gorbachev-flat-vitaly-gorbachev.png'),
-    Service('Electrician', 'https://img.icons8.com/external-wanicon-flat-wanicon/2x/external-multimeter-car-service-wanicon-flat-wanicon.png'),
-    Service('Painter', 'https://img.icons8.com/external-itim2101-flat-itim2101/2x/external-painter-male-occupation-avatar-itim2101-flat-itim2101.png'),
-    Service('Carpenter', 'https://img.icons8.com/fluency/2x/drill.png'),
-    Service('Gardener', 'https://img.icons8.com/external-itim2101-flat-itim2101/2x/external-gardener-male-occupation-avatar-itim2101-flat-itim2101.png'),
-  ];
-
-  List<dynamic> workers = [
-    ['Alfredo Schafer', 'Plumber', 'https://images.unsplash.com/photo-1506803682981-6e718a9dd3ee?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=c3a31eeb7efb4d533647e3cad1de9257', 4.8],
-    ['Michelle Baldwin', 'Cleaner', 'https://uifaces.co/our-content/donated/oLkb60i_.jpg', 4.6],
-    ['Brenon Kalu', 'Driver', 'https://uifaces.co/our-content/donated/VUMBKh1U.jpg', 4.4]
-  ];
-  
-  @override
   Widget build(BuildContext context) {
+    List<dynamic> workers = [
+      ['Alfredo Schafer','Plumber', 'https://images.unsplash.com/photo-1506803682981-6e718a9dd3ee?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=c3a31eeb7efb4d533647e3cad1de9257', 4.8],
+      ['Michelle Baldwin', 'Cleaner', 'https://images.unsplash.com/photo-1506803682981-6e718a9dd3ee?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=c3a31eeb7efb4d533647e3cad1de9257', 4.6],
+      ['Brenon Kalu', 'Driver','https://images.unsplash.com/photo-1506803682981-6e718a9dd3ee?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=c3a31eeb7efb4d533647e3cad1de9257', 4.4]
+    ];
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -35,30 +25,47 @@ class _HomePageState extends State<HomePage> {
         actions: [
           IconButton(
             onPressed: () {}, 
-            icon: Icon(Icons.notifications_none, color: Colors.grey.shade700, size: 30,),
+            icon: Icon(
+              EvaIcons.bellOutline,
+              color: Colors.grey.shade700,
+              size: Dimensions.iconSize14*2
+            ),
           )
         ],
         leading: GestureDetector(
           onTap: () {
-            Navigator.pushNamed(context, '/login');
+            //Navigator.pushNamed(context, '/login');
           },
           child: const Padding(
             padding: EdgeInsets.all(10.0),
             child: CircleAvatar(
-              backgroundImage: NetworkImage('https://uifaces.co/our-content/donated/NY9hnAbp.jpg'),
+              backgroundImage:NetworkImage(
+                'https://uifaces.co/our-content/donated/NY9hnAbp.jpg'
+              ),
             ),
           )
         ),
       ),
+      drawer: const MainDrawer(),
       body: SingleChildScrollView(
         child: Column(
           children: [
             FadeAnimation(1, Padding(
-              padding: const EdgeInsets.only(left: 20.0, top: 10.0, right: 10.0),
+              padding: EdgeInsets.only(
+                left: Dimensions.height20,
+                top: Dimensions.height10,
+                right: Dimensions.height10
+              ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text('Recent', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                  Text(
+                    'Recent',
+                    style: GoogleFonts.roboto(
+                      fontSize: Dimensions.font20,
+                      fontWeight: FontWeight.bold
+                    )
+                  ),
                   TextButton(
                     onPressed: () {}, 
                     child: const Text('View all',)
@@ -67,13 +74,13 @@ class _HomePageState extends State<HomePage> {
               ),
             )),
             FadeAnimation(1.2, Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              padding: EdgeInsets.symmetric(horizontal: Dimensions.height20),
               child: Container(
-                padding: const EdgeInsets.all(20.0),
-                height: 180,
+                padding: EdgeInsets.all(Dimensions.height20),
+                height: Dimensions.height210,
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(20.0),
+                  borderRadius: BorderRadius.circular(Dimensions.height20),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.grey.shade200,
@@ -90,39 +97,60 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         ClipRRect(
                           borderRadius: BorderRadius.circular(15.0),
-                          child: Image.network('https://images.pexels.com/photos/355164/pexels-photo-355164.jpeg?crop=faces&fit=crop&h=200&w=200&auto=compress&cs=tinysrgb', width: 70,)
+                          child: Image.network(
+                            'https://images.pexels.com/photos/355164/pexels-photo-355164.jpeg?crop=faces&fit=crop&h=200&w=200&auto=compress&cs=tinysrgb',
+                            width: Dimensions.height35*2)
                         ),
                         const SizedBox(width: 15,),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text("Isabel Kirkland", style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),),
-                            const SizedBox(height: 5,),
-                            Text("Cleaner", style: TextStyle(color: Colors.black.withOpacity(0.7), fontSize: 18),),
+                            Text(
+                              "Isabel Kirkland",
+                              style: GoogleFonts.roboto(
+                                color: Colors.black,
+                                fontSize: Dimensions.font20,
+                                fontWeight: FontWeight.bold),),
+                            SizedBox(height: Dimensions.height5),
+                            Text(
+                              "Cleaner",
+                              style: GoogleFonts.roboto(
+                                color: Colors.black.withOpacity(0.7),
+                                fontSize: Dimensions.font18)),
                           ],
                         )
                       ],
                     ),
-                    const SizedBox(height: 20,),
+                    SizedBox(height: Dimensions.height20),
                     Container(
-                      height: 50,
+                      height: Dimensions.height50,
                       decoration: BoxDecoration(
                         color: Colors.blue,
-                        borderRadius: BorderRadius.circular(15.0)
+                        borderRadius: BorderRadius.circular(Dimensions.height15)
                       ),
-                      child: const Center(child: Text('View Profile', style: TextStyle(color: Colors.white, fontSize: 18),)),
+                      child: Center(
+                        child: Text(
+                          'View Profile',
+                          style: GoogleFonts.roboto(
+                            color: Colors.white, fontSize: Dimensions.font18
+                          )
+                        )
+                      ),
                     )
                   ],
                 ),
               ),
             )),
-            const SizedBox(height: 20,),
+            SizedBox(height: Dimensions.height20),
             FadeAnimation(1.3, Padding(
-              padding: const EdgeInsets.only(left: 20.0, right: 10.0),
+              padding: EdgeInsets.only(left: Dimensions.height20, right: Dimensions.height10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text('Categories', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                  Text(
+                    'Categories',
+                    style: TextStyle(
+                      fontSize: Dimensions.font20, fontWeight: FontWeight.bold)),
                   TextButton(
                     onPressed: () {}, 
                     child: const Text('View all',)
@@ -131,8 +159,8 @@ class _HomePageState extends State<HomePage> {
               ),
             )),
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              height: 300,
+              padding: EdgeInsets.symmetric(horizontal: Dimensions.height20, vertical: Dimensions.height10),
+              height: Dimensions.height300,
               child: GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
@@ -141,19 +169,31 @@ class _HomePageState extends State<HomePage> {
                   mainAxisSpacing: 10.0,
                 ),
                 physics: const NeverScrollableScrollPhysics(),
-                itemCount: services.length,
+                itemCount: 6/* AppConstants.services.length */,
                 itemBuilder: (BuildContext context, int index) {
-                  return FadeAnimation((1.0 + index) / 4, serviceContainer(services[index].imageURL, services[index].name, index));
+                  return FadeAnimation((1.0 + index) / 4,
+                  ServiceContainer(
+                    image: AppConstants.services[index].imageURL,
+                    name: AppConstants.services[index].name,
+                    index:index,
+                    borderColor: Colors.blue.withOpacity(0),
+                    containerColor: Colors.grey.shade100,
+                    fontSize: Dimensions.font14,
+                    imageHeight: Dimensions.height45,
+                  ));
                 }
               ),
             ),
-            const SizedBox(height: 20,),
+            SizedBox(height: Dimensions.height20),
             FadeAnimation(1.3, Padding(
-              padding: const EdgeInsets.only(left: 20.0, right: 10.0),
+              padding: EdgeInsets.only(left: Dimensions.height20, right: Dimensions.height10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text('Top Rated', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                  Text(
+                    'Top Rated',
+                    style: GoogleFonts.roboto(
+                      fontSize: Dimensions.height20, fontWeight: FontWeight.bold),),
                   TextButton(
                     onPressed: () {}, 
                     child: const Text('View all',)
@@ -162,45 +202,27 @@ class _HomePageState extends State<HomePage> {
               ),
             )),
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              height: 120,
+              padding: EdgeInsets.symmetric(
+                horizontal: Dimensions.height20, vertical: Dimensions.height10),
+              height: Dimensions.height120,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: workers.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return FadeAnimation((1.0 + index) / 4, workerContainer(workers[index][0], workers[index][1], workers[index][2], workers[index][3]));
+                  return FadeAnimation((1.0 + index) / 4,
+                  workerContainer(
+                    workers[index][0],
+                    workers[index][1],
+                    workers[index][2],
+                    workers[index][3]
+                  ));
                 }
               ),
             ),
-            const SizedBox(height: 150,),
+            SizedBox(height: Dimensions.height50*3),
           ]
         )
       )
-    );
-  }
-
-  serviceContainer(String image, String name, int index) {
-    return GestureDetector(
-      child: Container(
-        margin: const EdgeInsets.only(right: 20),
-        padding: const EdgeInsets.all(10.0),
-        decoration: BoxDecoration(
-          color: Colors.grey.shade100,
-          border: Border.all(
-            color: Colors.blue.withOpacity(0),
-            width: 2.0,
-          ),
-          borderRadius: BorderRadius.circular(20.0),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Image.network(image, height: 45),
-            const SizedBox(height: 20,),
-            Text(name, style: const TextStyle(fontSize: 15),)
-          ]
-        ),
-      ),
     );
   }
 

@@ -1,10 +1,12 @@
 import 'package:fixit/controllers/select_services_controller.dart';
 import 'package:fixit/utils/constants/constants.dart';
+import 'package:fixit/utils/helpers/dimensions.dart';
 import 'package:fixit/view/pages/cleaning.dart';
 import 'package:fixit/view/widgets/fade_animation.dart';
 import 'package:fixit/view/widgets/service_container.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SelectService extends StatelessWidget {
   const SelectService({ Key? key }) : super(key: key);
@@ -12,7 +14,6 @@ class SelectService extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       floatingActionButton: GetBuilder<SelectServiceController>(
         builder: (controller) {
           return Container(
@@ -36,11 +37,14 @@ class SelectService extends StatelessWidget {
           return <Widget>[
             SliverToBoxAdapter(
               child: FadeAnimation(1.2, Padding(
-                padding: const EdgeInsets.only(top: 120.0, right: 20.0, left: 20.0),
+                padding: EdgeInsets.only(
+                  top: Dimensions.height50*2,
+                  right: Dimensions.height20,
+                  left: Dimensions.height20),
                 child: Text(
                   'Which service \ndo you need?',
-                  style: TextStyle(
-                    fontSize: 40,
+                  style: GoogleFonts.roboto(
+                    fontSize: Dimensions.font20*2,
                     color: Colors.grey.shade900,
                     fontWeight: FontWeight.bold,
                   ),
@@ -50,7 +54,7 @@ class SelectService extends StatelessWidget {
           ];
         },
         body: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: EdgeInsets.all(Dimensions.height20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
@@ -65,13 +69,28 @@ class SelectService extends StatelessWidget {
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: AppConstants.services.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return FadeAnimation(
-                      (1.0 + index) / 4,
-                      ServiceContainer(
-                        image: AppConstants.services[index].imageURL,
-                        name: AppConstants.services[index].name,
-                        index: index
-                      )
+                    return GetBuilder<SelectServiceController>(
+                      builder: (controller) {
+                        return FadeAnimation(
+                          (1.0 + index) / 4,
+                          ServiceContainer(
+                            onTap: (){
+                              controller.selectServiceIndex(index);
+                            },
+                            image: AppConstants.services[index].imageURL,
+                            name: AppConstants.services[index].name,
+                            index: index,
+                            containerColor: controller.selectedService == index 
+                              ? Colors.blue.shade50 
+                              : const Color(0xFFF5F5F5),
+                            borderColor: controller.selectedService == index
+                              ? Colors.blue
+                              : Colors.blue.withOpacity(0),
+                            fontSize: Dimensions.font20,
+                            imageHeight: Dimensions.height80,
+                          )
+                        );
+                      }
                     );
                   }
                 ),

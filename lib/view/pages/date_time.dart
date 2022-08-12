@@ -173,20 +173,24 @@ class DateAndTime extends StatelessWidget {
                           onTap: () {
                             controller.selectRepeatIndex(index);
                           },
-                          child: FadeAnimation((1.2 + index) / 4, Container(
-                            padding: EdgeInsets.symmetric(horizontal: Dimensions.height20),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(Dimensions.radius5*3),
-                              color: controller.selectedRepeat == index 
-                                ? Colors.blue.shade400 : Colors.grey.shade100,
-                            ),
-                            margin: EdgeInsets.only(right: Dimensions.height20),
-                            child: Center(child: Text(AppConstants.repeat[index], 
-                              style: GoogleFonts.roboto(
-                                fontSize: Dimensions.font18,
-                                color: controller.selectedRepeat == index ? Colors.white : Colors.grey.shade800),)
-                            ),
-                          )),
+                          child: FadeAnimation(
+                            (1.2 + index) / 4, 
+                            Container(
+                              padding: EdgeInsets.symmetric(horizontal: Dimensions.height20),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(Dimensions.radius5*3),
+                                color: controller.selectedRepeat == index 
+                                  ? Colors.blue.shade400 : Colors.grey.shade100,
+                              ),
+                              margin: EdgeInsets.only(right: Dimensions.height10),
+                              child: Center(child: Text(AppConstants.repeat[index], 
+                                style: GoogleFonts.roboto(
+                                  fontSize: Dimensions.font18,
+                                  color: controller.selectedRepeat == index
+                                    ? Colors.white
+                                    : Colors.grey.shade800),)
+                              ),
+                            )),
                         );
                       }
                     );
@@ -225,7 +229,7 @@ class DateAndTime extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Image.network(AppConstants.exteraCleaning[index][1], height: Dimensions.height40),
+                                Image.asset(AppConstants.exteraCleaning[index][1], height: Dimensions.height40),
                                 SizedBox(height: Dimensions.height10),
                                 Text(
                                   AppConstants.exteraCleaning[index][0],

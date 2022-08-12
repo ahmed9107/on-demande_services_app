@@ -1,3 +1,7 @@
+import 'package:fixit/controllers/auth/forget_password_controller.dart';
+import 'package:fixit/controllers/auth/login_controller.dart';
+import 'package:fixit/controllers/auth/signup_controller.dart';
+import 'package:fixit/controllers/auth/verify_code_controller.dart';
 import 'package:fixit/controllers/datetime_controller.dart';
 import 'package:fixit/controllers/select_services_controller.dart';
 import 'package:fixit/controllers/start_page_controller.dart';
@@ -10,6 +14,10 @@ Future<void> init() async {
 
   // Controllers
   Get.lazyPut(() => SelectServiceController());
-  Get.lazyPut(() => StartController());
+  Get.lazyPut(() => LoginController());
+  Get.lazyPut(() => ForgetPassController());
+  Get.lazyPut(() => VerifyCodeController());
+  Get.lazyPut(() => SignUpController());
+  Get.lazyPut(() => StartController(sharedPref: Get.find()));
   Get.lazyPut(() => DateTimeController());
 }

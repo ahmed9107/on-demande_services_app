@@ -1,3 +1,4 @@
+import 'package:fixit/utils/constants/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_animations/simple_animations.dart';
 
@@ -30,5 +31,3 @@ class FadeAnimation extends StatelessWidget {
     );
   }
 }
-
-enum AniProps { opacity, translateY }

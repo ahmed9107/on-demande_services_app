@@ -1,24 +1,13 @@
+import 'package:fixit/controllers/start_page_controller.dart';
 import 'package:fixit/utils/constants/constants.dart';
 import 'package:fixit/utils/helpers/dimensions.dart';
-import 'package:fixit/view/pages/select_service.dart';
 import 'package:fixit/view/widgets/fade_animation.dart';
-import 'package:fixit/view/widgets/start_service_container.dart';
+import 'package:fixit/view/widgets/service_container.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class StartPage extends StatelessWidget {
   const StartPage({ Key? key }) : super(key: key);
-
-  /* List<Service> services = [
-    Service('Cleaning', 'https://img.icons8.com/external-vitaliy-gorbachev-flat-vitaly-gorbachev/2x/external-cleaning-labour-day-vitaliy-gorbachev-flat-vitaly-gorbachev.png'),
-    Service('Plumber', 'https://img.icons8.com/external-vitaliy-gorbachev-flat-vitaly-gorbachev/2x/external-plumber-labour-day-vitaliy-gorbachev-flat-vitaly-gorbachev.png'),
-    Service('Electrician', 'https://img.icons8.com/external-wanicon-flat-wanicon/2x/external-multimeter-car-service-wanicon-flat-wanicon.png'),
-    Service('Painter', 'https://img.icons8.com/external-itim2101-flat-itim2101/2x/external-painter-male-occupation-avatar-itim2101-flat-itim2101.png'),
-    Service('Carpenter', 'https://img.icons8.com/fluency/2x/drill.png'),
-    Service('Gardener', 'https://img.icons8.com/external-itim2101-flat-itim2101/2x/external-gardener-male-occupation-avatar-itim2101-flat-itim2101.png'),
-    Service('Tailor', 'https://img.icons8.com/fluency/2x/sewing-machine.png'),
-    Service('Maid', 'https://img.icons8.com/color/2x/housekeeper-female.png'),
-    Service('Driver', 'https://img.icons8.com/external-sbts2018-lineal-color-sbts2018/2x/external-driver-women-profession-sbts2018-lineal-color-sbts2018.png'),
-  ]; */
   
   @override
   Widget build(BuildContext context) {
@@ -41,10 +30,18 @@ class StartPage extends StatelessWidget {
               itemCount: 9,
               itemBuilder: (BuildContext context, int index) {
                 return FadeAnimation((1.0 + index) / 4,
-                  StartServiceContainer(
-                    image: AppConstants.services[index].imageURL,
-                    name: AppConstants.services[index].name,
-                    index: index
+                  GetBuilder<StartController>(
+                    builder: (controller) {
+                      return ServiceContainer(
+                        image: AppConstants.services[index].imageURL,
+                        name: AppConstants.services[index].name,
+                        index: index,
+                        borderColor: controller.selectedService == index ? Colors.blue.shade100 : Colors.grey.withOpacity(0),
+                        containerColor: controller.selectedService == index ? Colors.white : Colors.grey.shade100,
+                        fontSize: Dimensions.font14,
+                        imageHeight: Dimensions.height60/2,
+                      );
+                    }
                   )
                 );
               }
@@ -96,12 +93,13 @@ class StartPage extends StatelessWidget {
                       elevation: 0,
                       color: Colors.black,
                       onPressed: () {
-                        Navigator.push(
+                        Get.find<StartController>().getStarted();
+                        /* Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) => const SelectService(),
                           ),
-                        );
+                        ); */
                       },
                       height: Dimensions.height50*1.1,
                       shape: RoundedRectangleBorder(

@@ -124,3 +124,5 @@ class AppConstants{
     ['Windows', '${iconsRoot}windows.png', '20'],
   ];
 }
+
+enum AniProps { opacity, translateY }
